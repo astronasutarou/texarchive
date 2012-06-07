@@ -1,0 +1,41 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+sub rec_print {
+		my $file=shift;
+		our $bname;
+		open(my $fh, "<", $file) 
+				or die "Cannot open $file: $!";
+
+		while (<$fh>) {
+				next if (/^%/);
+				if (/\\input{(.*)}/) {rec_print($1);	next;}
+				if (/\\bibliography.*/) {bbl_print($bname);	next;}
+				print;
+		}
+}
+sub bbl_print {
+		my $file=shift;
+		open(my $fh, "<", $file) 
+				or die "Cannot open $file: $!";
+		my $lines;
+		{
+				local $/ = undef;
+				$lines = readline $fh;
+		}
+		$lines =~ s/\n//g;
+		$lines =~ s/\\bibitem/\n\\bibitem/g;
+		$lines =~ s/\\end/\n\\end/g;
+		$lines =~ s/\\expandafter/\n\\expandafter/g;
+		$lines =~ s/\\bibitem\[{(.*\(....\)).*\]/\\bibitem[$1]/g;
+		$lines =~ s/{et~al.}/{\\etal}/g;
+		$lines =~ s/\\bibitem{(\w*)}/\\bibitem{$1}\n/g;
+		print $lines;
+}
+
+my $fname = shift;
+our $bname = $fname;
+$bname =~ s/tex/bbl/;
+
+rec_print($fname);
