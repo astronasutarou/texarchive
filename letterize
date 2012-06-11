@@ -11,7 +11,7 @@ sub rec_print {
 		while (<$fh>) {
 				next if (/^%/);
 				if (/\\input{(.*)}/) {rec_print($1);	next;}
-				if (/\\bibliography.*/) {bbl_print($bname);	next;}
+				if (/\\bibliography{.*}/) {bbl_print($bname);	next;}
 				print;
 		}
 }
