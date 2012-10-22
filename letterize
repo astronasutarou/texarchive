@@ -10,6 +10,8 @@ sub rec_print {
 
 		while (<$fh>) {
 				next if (/^%/);
+				if (s/\\documentclass\[.*\]\{(.*)\}/\\documentclass{$1}/)
+					{print; next;}
 				if (/\\input{(.*)}/) {rec_print($1);	next;}
 				if (/\\bibliography{.*}/) {bbl_print($bname);	next;}
 				print;
