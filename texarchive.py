@@ -61,7 +61,6 @@ def recursive_print(filename, fout):
           MISC_PATH.append(
             {re.sub(u'{}$'.format(ext),u'xbb',figpath):
              re.sub(u'{}$'.format(ext),u'xbb',figname)})
-        continue
 
       fig = RE_PLTONE.search(line)
       if fig is not None:
@@ -74,7 +73,6 @@ def recursive_print(filename, fout):
           MISC_PATH.append(
             {re.sub(u'{}$'.format(ext),u'xbb',figpath):
              re.sub(u'{}$'.format(ext),u'xbb',figname)})
-        continue
 
       fig = RE_PLTTWO.search(line)
       if fig is not None:
@@ -94,7 +92,6 @@ def recursive_print(filename, fout):
           MISC_PATH.append(
             {re.sub(u'{}$'.format(ext),u'xbb',figpath2):
              re.sub(u'{}$'.format(ext),u'xbb',figname2)})
-        continue
 
       fout.write(line)
 
