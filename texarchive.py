@@ -133,6 +133,7 @@ if __name__ == '__main__':
             '  append figure file "{}" as "{}"'.format(figpath, arcname))
       for items in MISC_PATH:
         for miscpath,arcname in items.iteritems():
-          arv.add(miscpath, arcname=arcname)
-          LOGGER.info(
-            '  append misc file "{}" as "{}"'.format(figpath, arcname))
+          if os.path.exists(miscpath):
+            arv.add(miscpath, arcname=arcname)
+            LOGGER.info(
+              '  append misc file "{}" as "{}"'.format(figpath, arcname))
