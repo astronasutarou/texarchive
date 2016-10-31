@@ -104,7 +104,7 @@ def bbl_print(filename, fout):
 
 if __name__ == '__main__':
   parser = ap(
-    'Make a multi-file tex documents into a single tex file.')
+    description='Make a multi-file tex documents into a single tex file.')
   parser.add_argument(
     'master_tex', metavar='master', type=unicode,
     help='master .tex file to be converted.')
